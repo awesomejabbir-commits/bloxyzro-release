@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HAS HE BEEN RELEASED YET?</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #000;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    user-select: none;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    height: 92vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+}
+
+/* Quote */
+
+.quote {
+    margin-top: 10px;
+    font-size: clamp(0.9rem, 3vw, 1.15rem);
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.78);
+    text-shadow: 0 0 12px rgba(255,255,255,0.35);
+}
+
+/* Header */
+
+.header-title {
+    margin-top: 10px;
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    color: rgba(255,255,255,0.95);
+    text-shadow: 0 0 12px rgba(255,255,255,0.4);
+}
+
+/* Clock */
+
+.clock-container {
+    width: clamp(290px, 78vw, 440px);
+    height: clamp(290px, 78vw, 440px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto 0;
+}
+
+.clock-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+/* Celestial lines */
+
+.ethereal-line-faint {
+    stroke: rgba(255,255,255,0.12);
+    stroke-width: 0.4;
+    fill: none;
+}
+
+.ethereal-line-thin {
+    stroke: rgba(255,255,255,0.22);
+    stroke-width: 0.5;
+    fill: none;
+}
+
+.ethereal-line {
+    stroke: rgba(255,255,255,0.45);
+    stroke-width: 0.75;
+    fill: none;
+}
+
+.ethereal-line-bold {
+    stroke: rgba(255,255,255,0.85);
+    stroke-width: 1.1;
+    fill: none;
+}
+
+.ethereal-dashed {
+    stroke: rgba(255,255,255,0.3);
+    stroke-width: 0.5;
+    stroke-dasharray: 2 4;
+    fill: none;
+}
+
+/* Ticks */
+
+.tick {
+    stroke: rgba(255,255,255,0.35);
+    stroke-width: 0.65;
+}
+
+.tick-major {
+    stroke: rgba(255,255,255,0.9);
+    stroke-width: 1.25;
+    filter: drop-shadow(0 0 2px rgba(255,255,255,0.8));
+}
+
+/* Numbers */
+
+.clock-number {
+    font-size: 10.5px;
+    font-weight: 300;
+    fill: rgba(255,255,255,0.75);
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+
+/* HANDS */
+
+.hand {
+    stroke-linecap: round;
+}
+
+.hour-hand {
+    stroke: rgba(255,255,255,0.9);
+    stroke-width: 1.8;
+    filter: drop-shadow(0 0 4px rgba(255,255,255,0.8));
+}
+
+.minute-hand {
+    stroke: #fff;
+    stroke-width: 1.2;
+    filter: drop-shadow(0 0 5px rgba(255,255,255,0.9));
+}
+
+.second-hand {
+    stroke: rgba(255,255,255,0.95);
+    stroke-width: 0.8;
+    filter: drop-shadow(0 0 6px rgba(255,255,255,1));
+}
+
+/* Status */
+
+.status-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.status-main {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    color: #fff;
+    text-shadow: 0 0 15px rgba(255,255,255,0.5);
+}
+
+.status-release {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.release-text {
+    font-size: clamp(1.1rem, 4vw, 1.35rem);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: #fff;
+    text-shadow: 0 0 12px rgba(255,255,255,0.7);
+}
+
+.release-sub {
+    font-size: clamp(0.95rem, 3.5vw, 1.15rem);
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.85);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- QUOTE -->
+
+    <div class="quote">
+        Never count the days. Let the days count.
+    </div>
+
+    <!-- TITLE -->
+
+    <div class="header-title">
+        HAS HE BEEN RELEASED YET?
+    </div>
+
+    <!-- CLOCK -->
+
+    <div class="clock-container">
+
+        <svg
+            class="clock-svg"
+            viewBox="0 0 400 400"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+
+            <defs>
+
+                <filter id="bloom">
+                    <feGaussianBlur
+                        stdDeviation="2"
+                        result="blur"
+                    />
+
+                    <feMerge>
+                        <feMergeNode in="blur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+
+                <filter id="faintGlow">
+                    <feGaussianBlur
+                        stdDeviation="1"
+                        result="blur"
+                    />
+
+                    <feMerge>
+                        <feMergeNode in="blur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+
+            </defs>
+
+            <!-- Outer halo -->
+
+            <circle
+                cx="200"
+                cy="200"
+                r="172"
+                fill="none"
+                stroke="rgba(255,255,255,0.03)"
+                stroke-width="12"
+            />
+
+            <!-- Concentric celestial rings -->
+
+            <circle cx="200" cy="200" r="192" class="ethereal-line-faint"/>
+            <circle cx="200" cy="200" r="185" class="ethereal-line-thin"/>
+
+            <circle
+                cx="200"
+                cy="200"
+                r="168"
+                class="ethereal-line-bold"
+                filter="url(#faintGlow)"
+            />
+
+            <circle cx="200" cy="200" r="164" class="ethereal-line-faint"/>
+            <circle cx="200" cy="200" r="152" class="ethereal-dashed"/>
+            <circle cx="200" cy="200" r="138" class="ethereal-line-thin"/>
+            <circle cx="200" cy="200" r="124" class="ethereal-line"/>
+            <circle cx="200" cy="200" r="102" class="ethereal-line-thin"/>
+            <circle cx="200" cy="200" r="82" class="ethereal-dashed"/>
+            <circle cx="200" cy="200" r="62" class="ethereal-line-faint"/>
+            <circle cx="200" cy="200" r="44" class="ethereal-line-thin"/>
+            <circle cx="200" cy="200" r="28" class="ethereal-line"/>
+            <circle cx="200" cy="200" r="14" class="ethereal-line-faint"/>
+
+            <!-- Astronomical guide lines -->
+
+            <line
+                x1="200"
+                y1="20"
+                x2="200"
+                y2="380"
+                class="ethereal-line-faint"
+                stroke-dasharray="2 6"
+            />
+
+            <line
+                x1="20"
+                y1="200"
+                x2="380"
+                y2="200"
+                class="ethereal-line-faint"
+                stroke-dasharray="2 6"
+            />
+
+            <line
+                x1="80"
+                y1="80"
+                x2="320"
+                y2="320"
+                class="ethereal-line-faint"
+                stroke-dasharray="1 10"
+            />
+
+            <line
+                x1="320"
+                y1="80"
+                x2="80"
+                y2="320"
+                class="ethereal-line-faint"
+                stroke-dasharray="1 10"
+            />
+
+            <!-- Celestial nodes -->
+
+            <circle
+                cx="200"
+                cy="124"
+                r="14"
+                class="ethereal-line-thin"
+            />
+
+            <circle
+                cx="200"
+                cy="124"
+                r="2"
+                fill="rgba(255,255,255,0.😎"
+            />
+
+            <circle
+                cx="200"
+                cy="276"
+                r="8"
+                class="ethereal-line-thin"
+            />
+
+            <circle
+                cx="200"
+                cy="276"
+                r="1.5"
+                fill="rgba(255,255,255,0.6)"
+            />
+
+            <circle
+                cx="124"
+                cy="200"
+                r="4"
+                class="ethereal-line-thin"
+            />
+
+            <circle
+                cx="276"
+                cy="200"
+                r="4"
+                class="ethereal-line-thin"
+            />
+
+            <!-- 60 TICKS -->
+
+            <g
+                id="ticksGroup"
+                filter="url(#faintGlow)"
+            ></g>
+
+            <!-- 12 NUMBERS -->
+
+            <g
+                id="numbersGroup"
+                filter="url(#faintGlow)"
+            ></g>
+
+            <!-- ========================= -->
+            <!-- ACTUAL CLOCK HANDS -->
+            <!-- ========================= -->
+
+            <g filter="url(#bloom)">
+
+                <!-- Hour -->
+
+                <line
+                    id="hourHand"
+                    x1="200"
+                    y1="200"
+                    x2="200"
+                    y2="122"
+                    class="hand hour-hand"
+                />
+
+                <!-- Minute -->
+
+                <line
+                    id="minuteHand"
+                    x1="200"
+                    y1="200"
+                    x2="200"
+                    y2="76"
+                    class="hand minute-hand"
+                />
+
+                <!-- Second -->
+
+                <line
+                    id="secondHand"
+                    x1="200"
+                    y1="218"
+                    x2="200"
+                    y2="44"
+                    class="hand second-hand"
+                />
+
+                <!-- Center -->
+
+                <circle
+                    cx="200"
+                    cy="200"
+                    r="3.5"
+                    fill="#fff"
+                />
+
+                <circle
+                    cx="200"
+                    cy="200"
+                    r="1.5"
+                    fill="#000"
+                />
+
+            </g>
+
+        </svg>
+
+    </div>
+
+    <!-- STATUS -->
+
+    <div class="status-section">
+
+        <div
+            class="status-main"
+            id="statusMain"
+        >
+            INCARCERATED
+        </div>
+
+        <div
+            class="status-release"
+            id="statusRelease"
+        >
+
+            <div class="release-text">
+                HE HAS BEEN RELEASED.
+            </div>
+
+            <div class="release-sub">
+                BLOXYZRO IS FREE.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+// ==========================================
+// ELEMENTS
+// ==========================================
+
+const ticksGroup =
+    document.getElementById("ticksGroup");
+
+const numbersGroup =
+    document.getElementById("numbersGroup");
+
+const hourHand =
+    document.getElementById("hourHand");
+
+const minuteHand =
+    document.getElementById("minuteHand");
+
+const secondHand =
+    document.getElementById("secondHand");
+
+const statusMain =
+    document.getElementById("statusMain");
+
+const statusRelease =
+    document.getElementById("statusRelease");
+
+
+// ==========================================
+// CREATE 60 TICK MARKS
+// ==========================================
+
+const outerRadius = 168;
+
+for (let i = 0; i < 60; i++) {
+
+    const angle =
+        i * 6 * Math.PI / 180;
+
+    const isMajor =
+        i % 5 === 0;
+
+    const tickLength =
+        isMajor ? 9 : 4.5;
+
+    const x1 =
+        200 +
+        (outerRadius - tickLength) *
+        Math.sin(angle);
+
+    const y1 =
+        200 -
+        (outerRadius - tickLength) *
+        Math.cos(angle);
+
+    const x2 =
+        200 +
+        outerRadius *
+        Math.sin(angle);
+
+    const y2 =
+        200 -
+        outerRadius *
+        Math.cos(angle);
+
+    const line =
+        document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "line"
+        );
+
+    line.setAttribute("x1", x1);
+    line.setAttribute("y1", y1);
+    line.setAttribute("x2", x2);
+    line.setAttribute("y2", y2);
+
+    line.setAttribute(
+        "class",
+        isMajor
+            ? "tick tick-major"
+            : "tick"
+    );
+
+    ticksGroup.appendChild(line);
+}
+
+
+// ==========================================
+// CREATE 12 NUMBERS
+// ==========================================
+
+const numberRadius = 142;
+
+for (let num = 1; num <= 12; num++) {
+
+    const angle =
+        num * 30 * Math.PI / 180;
+
+    const x =
+        200 +
+        numberRadius *
+        Math.sin(angle);
+
+    const y =
+        200 -
+        numberRadius *
+        Math.cos(angle);
+
+    const text =
+        document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "text"
+        );
+
+    text.setAttribute("x", x);
+    text.setAttribute("y", y);
+    text.setAttribute(
+        "class",
+        "clock-number"
+    );
+
+    text.textContent = num;
+
+    numbersGroup.appendChild(text);
+}
+
+
+// ==========================================
+// RELEASE TIME
+// November 13, 2026
+// 12:00 AM Philippine Time
+// ==========================================
+
+const targetReleaseTime =
+    new Date(
+        "2026-11-13T00:00:00+08:00"
+    ).getTime();
+
+
+// ==========================================
+// UPDATE CLOCK
+// ==========================================
+
+function updateClock() {
+
+    const now = new Date();
+
+    const milliseconds =
+        now.getMilliseconds();
+
+    const seconds =
+        now.getSeconds() +
+        milliseconds / 1000;
+
+    const minutes =
+        now.getMinutes() +
+        seconds / 60;
+
+    const hours =
+        (now.getHours() % 12) +
+        minutes / 60;
+
+
+    // ======================================
+    // CALCULATE HAND ANGLES
+    // ======================================
+
+    const secondDeg =
+        seconds * 6;
+
+    const minuteDeg =
+        minutes * 6;
+
+    const hourDeg =
+        hours * 30;
+
+
+    // ======================================
+    // MOVE HANDS
+    // ======================================
+
+    secondHand.setAttribute(
+        "transform",
+        "rotate(" +
+        secondDeg +
+        " 200 200)"
+    );
+
+    minuteHand.setAttribute(
+        "transform",
+        "rotate(" +
+        minuteDeg +
+        " 200 200)"
+    );
+
+    hourHand.setAttribute(
+        "transform",
+        "rotate(" +
+        hourDeg +
+        " 200 200)"
+    );
+
+
+    // ======================================
+    // CHECK RELEASE
+    // ======================================
+
+    if (
+        now.getTime() >=
+        targetReleaseTime
+    ) {
+
+        statusMain.style.display =
+            "none";
+
+        statusRelease.style.display =
+            "flex";
+
+    } else {
+
+        statusMain.style.display =
+            "block";
+
+        statusRelease.style.display =
+            "none";
+    }
+
+
+    // Keep updating
+
+    requestAnimationFrame(updateClock);
+}
+
+
+// ==========================================
+// START
+// ==========================================
+
+updateClock();
+
+</script>
+
+</body>
+</html>
